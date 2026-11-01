@@ -108,7 +108,7 @@
 
     /* ---------- mono section labels: scramble ---------- */
     document.querySelectorAll('section div').forEach(function (d) {
-      if (d.children.length === 0 && /^0\d — /.test(d.textContent.trim())) {
+      if (d.children.length === 0 && /^\d{2} — /.test(d.textContent.trim())) {
         d.dataset.hzLabel = '1'; var txt = d.textContent; d.textContent = '';
         onEnter(d, function () { d.textContent = txt; scramble(d); }, 'top 92%');
       }
@@ -190,9 +190,13 @@
     var labCards = lab ? lab.querySelectorAll('a[style*="border-radius:20px"], a[style*="border-radius: 20px"]') : [];
     if (labCards.length) gsap.from(labCards, { y: 90, opacity: 0, rotate: function (i) { return (i % 2 ? 3 : -3); }, duration: 1.2, ease: 'expo.out', stagger: 0.09, scrollTrigger: { trigger: labCards[0], start: 'top 88%' } });
 
+    /* ---------- testimonial cards ---------- */
+    var quoteCards = document.querySelectorAll('#testimonials [data-tilt]');
+    if (quoteCards.length) gsap.from(quoteCards, { y: 90, opacity: 0, rotate: function (i) { return (i % 2 ? 3 : -3); }, duration: 1.2, ease: 'expo.out', stagger: 0.09, scrollTrigger: { trigger: quoteCards[0], start: 'top 88%' } });
+
     /* ---------- tilt + spotlight on cards ---------- */
     if (FINE && !REDUCE) {
-      var tiltEls = Array.prototype.slice.call(labCards).concat([].slice.call(document.querySelectorAll('#build-2,#build-3,#build-4')));
+      var tiltEls = Array.prototype.slice.call(labCards).concat([].slice.call(quoteCards), [].slice.call(document.querySelectorAll('#build-2,#build-3,#build-4')));
       tiltEls.forEach(function (el) {
         el.style.transition = 'box-shadow .3s, border-color .3s';
         if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
