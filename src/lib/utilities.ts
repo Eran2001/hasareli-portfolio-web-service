@@ -1,0 +1,7 @@
+export function prefersReducedMotion() {
+  return matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+export function prefersFinePointer() {
+  return matchMedia('(pointer: fine)').matches
+}
